@@ -146,17 +146,29 @@ Page resource error:
         },
       )
       ..loadRequest(LoadRequestParams(
-        uri: Uri.parse(
-            'https://comento.kr/vod/lecture/%EB%A7%88%EC%BC%80%ED%8C%85/%EC%98%A4%EB%8A%98-%EB%8B%B9%EC%9E%A5-%EC%8D%A8%EB%A8%B9%EB%8A%94-crm-%EB%A7%88%EC%BC%80%ED%8C%85-feat-braze'),
+        uri: Uri.parse('https://flutter.dev'),
       ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF4CAF50),
+      appBar: AppBar(
+        title: const Text('Flutter WebView example'),
+        // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
+        actions: <Widget>[
+          NavigationControls(webViewController: _controller),
+          SampleMenu(
+            webViewController: _controller,
+            cookieManager: widget.cookieManager,
+          ),
+        ],
+      ),
       body: PlatformWebViewWidget(
         PlatformWebViewWidgetCreationParams(controller: _controller),
       ).build(context),
+      floatingActionButton: favoriteButton(),
     );
   }
 

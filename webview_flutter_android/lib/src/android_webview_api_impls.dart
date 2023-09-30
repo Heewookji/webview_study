@@ -47,7 +47,6 @@ class AndroidWebViewFlutterApis {
         geolocationPermissionsCallbackFlutterApi,
     WebViewFlutterApiImpl? webViewFlutterApi,
     PermissionRequestFlutterApiImpl? permissionRequestFlutterApi,
-    CustomViewCallbackFlutterApiImpl? customViewCallbackFlutterApi,
   }) {
     this.javaObjectFlutterApi =
         javaObjectFlutterApi ?? JavaObjectFlutterApiImpl();
@@ -67,8 +66,6 @@ class AndroidWebViewFlutterApis {
     this.webViewFlutterApi = webViewFlutterApi ?? WebViewFlutterApiImpl();
     this.permissionRequestFlutterApi =
         permissionRequestFlutterApi ?? PermissionRequestFlutterApiImpl();
-    this.customViewCallbackFlutterApi =
-        customViewCallbackFlutterApi ?? CustomViewCallbackFlutterApiImpl();
   }
 
   static bool _haveBeenSetUp = false;
@@ -105,8 +102,6 @@ class AndroidWebViewFlutterApis {
 
   /// Flutter Api for [PermissionRequest].
   late final PermissionRequestFlutterApiImpl permissionRequestFlutterApi;
-
-  late final CustomViewCallbackFlutterApiImpl customViewCallbackFlutterApi;
 
   /// Ensures all the Flutter APIs have been setup to receive calls from native code.
   void ensureSetUp() {
@@ -1238,40 +1233,5 @@ class CookieManagerHostApiImpl extends CookieManagerHostApi {
       instanceManager.getIdentifier(webView)!,
       accept,
     );
-  }
-}
-
-class CustomViewCallbackHostApiImpl extends CustomViewCallbackHostApi {
-  CustomViewCallbackHostApiImpl({
-    this.binaryMessenger,
-    InstanceManager? instanceManager,
-  }) : instanceManager = instanceManager ?? JavaObject.globalInstanceManager;
-
-  final BinaryMessenger? binaryMessenger;
-
-  final InstanceManager instanceManager;
-
-  Future<void> onCustomViewHiddenFromInstances(CustomViewCallback instance) {
-    return onCustomViewHidden(instanceManager.getIdentifier(instance)!);
-  }
-}
-
-class CustomViewCallbackFlutterApiImpl implements CustomViewCallbackFlutterApi {
-  CustomViewCallbackFlutterApiImpl({
-    this.binaryMessenger,
-    InstanceManager? instanceManager,
-  }) : instanceManager = instanceManager ?? JavaObject.globalInstanceManager;
-
-  final BinaryMessenger? binaryMessenger;
-  final InstanceManager instanceManager;
-
-  @override
-  void create(int identifier) {
-    instanceManager.addHostCreatedInstance(
-        CustomViewCallback.detached(
-          binaryMessenger: binaryMessenger,
-          instanceManager: instanceManager,
-        ),
-        identifier);
   }
 }

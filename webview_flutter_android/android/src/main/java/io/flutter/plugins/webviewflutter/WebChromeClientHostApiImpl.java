@@ -4,18 +4,9 @@
 
 package io.flutter.plugins.webviewflutter;
 
-import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowInsets;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.webkit.GeolocationPermissions;
 import android.webkit.PermissionRequest;
 import android.webkit.ValueCallback;
@@ -39,7 +30,6 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
   private final InstanceManager instanceManager;
   private final WebChromeClientCreator webChromeClientCreator;
   private final WebChromeClientFlutterApiImpl flutterApi;
-  private Context context;
 
   /**
    * Implementation of {@link WebChromeClient} that passes arguments of callback methods to Dart.
@@ -47,46 +37,14 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
   public static class WebChromeClientImpl extends SecureWebChromeClient {
     private final WebChromeClientFlutterApiImpl flutterApi;
     private boolean returnValueForOnShowFileChooser = false;
-    private View mFullscreenView;
-    private final Context context;
 
     /**
      * Creates a {@link WebChromeClient} that passes arguments of callbacks methods to Dart.
      *
      * @param flutterApi handles sending messages to Dart
      */
-    public WebChromeClientImpl(@NonNull WebChromeClientFlutterApiImpl flutterApi, Context context) {
+    public WebChromeClientImpl(@NonNull WebChromeClientFlutterApiImpl flutterApi) {
       this.flutterApi = flutterApi;
-      this.context = context;
-    }
-
-    @Override
-    public void onShowCustomView(View view, WebChromeClient.CustomViewCallback callback) {
-      if (mFullscreenView != null) {
-        callback.onCustomViewHidden();
-        return;
-      }
-      if (context instanceof Activity) {
-      this.mFullscreenView = view;
-      Window window = ((Activity)context).getWindow();
-      window.addContentView(mFullscreenView,
-          new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-              ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER));
-      }
-    }
-
-    @Override
-    public void onHideCustomView() {
-      super.onHideCustomView();
-      if (mFullscreenView == null) {
-        return;
-      }
-      ((ViewGroup) mFullscreenView.getParent()).removeView(mFullscreenView);
-      mFullscreenView = null;
-    }
-    @VisibleForTesting
-    public View getFullscreenView() {
-      return this.mFullscreenView;
     }
 
     @Override
@@ -241,8 +199,8 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
      */
     @NonNull
     public WebChromeClientImpl createWebChromeClient(
-        @NonNull WebChromeClientFlutterApiImpl flutterApi, Context context) {
-      return new WebChromeClientImpl(flutterApi, context);
+        @NonNull WebChromeClientFlutterApiImpl flutterApi) {
+      return new WebChromeClientImpl(flutterApi);
     }
   }
 
@@ -256,22 +214,16 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
   public WebChromeClientHostApiImpl(
       @NonNull InstanceManager instanceManager,
       @NonNull WebChromeClientCreator webChromeClientCreator,
-      @NonNull WebChromeClientFlutterApiImpl flutterApi,
-      @NonNull Context context) {
+      @NonNull WebChromeClientFlutterApiImpl flutterApi) {
     this.instanceManager = instanceManager;
     this.webChromeClientCreator = webChromeClientCreator;
     this.flutterApi = flutterApi;
-    this.context = context;
-  }
-
-  public void setContext(Context context) {
-    this.context = context;
   }
 
   @Override
   public void create(@NonNull Long instanceId) {
     final WebChromeClient webChromeClient =
-        webChromeClientCreator.createWebChromeClient(flutterApi, context);
+        webChromeClientCreator.createWebChromeClient(flutterApi);
     instanceManager.addDartCreatedInstance(webChromeClient, instanceId);
   }
 

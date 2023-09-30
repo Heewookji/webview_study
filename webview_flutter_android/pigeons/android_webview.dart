@@ -446,13 +446,3 @@ abstract class GeolocationPermissionsCallbackFlutterApi {
   /// Create a new Dart instance and add it to the `InstanceManager`.
   void create(int instanceId);
 }
-
-@HostApi(dartHostTestHandler: 'TestCustomViewCallbackHostApi')
-abstract class CustomViewCallbackHostApi {
-  void onCustomViewHidden(int identifier);
-}
-
-@FlutterApi()
-abstract class CustomViewCallbackFlutterApi {
-  void create(int identifier);
-}

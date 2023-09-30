@@ -1370,21 +1370,3 @@ class WebStorage extends JavaObject {
     );
   }
 }
-
-class CustomViewCallback extends JavaObject {
-  @protected
-  CustomViewCallback.detached({
-    required super.binaryMessenger,
-    required super.instanceManager,
-  })  : _customViewCallbackApi = CustomViewCallbackHostApiImpl(
-          binaryMessenger: binaryMessenger,
-          instanceManager: instanceManager,
-        ),
-        super.detached();
-
-  final CustomViewCallbackHostApiImpl _customViewCallbackApi;
-
-  Future<void> onCustomViewHidden() {
-    return _customViewCallbackApi.onCustomViewHiddenFromInstances(this);
-  }
-}

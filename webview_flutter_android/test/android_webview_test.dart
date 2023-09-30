@@ -17,7 +17,6 @@ import 'test_android_webview.g.dart';
   CookieManagerHostApi,
   DownloadListener,
   JavaScriptChannel,
-  TestCustomViewCallbackHostApi,
   TestCookieManagerHostApi,
   TestDownloadListenerHostApi,
   TestGeolocationPermissionsCallbackHostApi,
@@ -1283,37 +1282,6 @@ void main() {
       await instance.deny();
 
       verify(mockApi.deny(instanceIdentifier));
-    });
-  });
-
-  group('CustomViewCallback', () {
-    setUp(() {});
-
-    tearDown(() {
-      TestCustomViewCallbackHostApi.setup(null);
-    });
-
-    test('onCustomViewHidden', () async {
-      final MockTestCustomViewCallbackHostApi mockApi =
-          MockTestCustomViewCallbackHostApi();
-      TestCustomViewCallbackHostApi.setup(mockApi);
-
-      final InstanceManager instanceManager = InstanceManager(
-        onWeakReferenceRemoved: (_) {},
-      );
-
-      final CustomViewCallback instance = CustomViewCallback.detached(
-        binaryMessenger: null,
-        instanceManager: instanceManager,
-      );
-      const int instanceIdentifier = 0;
-      instanceManager.addHostCreatedInstance(instance, instanceIdentifier);
-
-      await instance.onCustomViewHidden();
-
-      verify(mockApi.onCustomViewHidden(
-        instanceIdentifier,
-      ));
     });
   });
 

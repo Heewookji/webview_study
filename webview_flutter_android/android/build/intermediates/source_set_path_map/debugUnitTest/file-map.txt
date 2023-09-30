@@ -1,0 +1,7 @@
+io.flutter.plugins.webviewflutter.test-core-1.1.0-0 /Users/heewook/.gradle/caches/transforms-3/06dcd8715db6b816b31675ce4f6bc3ae/transformed/core-1.1.0/res
+io.flutter.plugins.webviewflutter.test-webkit-1.7.0-1 /Users/heewook/.gradle/caches/transforms-3/1d7fcae66e55129d812b5ab790ecf170/transformed/webkit-1.7.0/res
+io.flutter.plugins.webviewflutter.test-test-2 /Users/heewook/dev/projects/packages/packages/webview_flutter/webview_flutter_android/android/build/generated/res/resValues/test/debug
+io.flutter.plugins.webviewflutter.test-mergeDebugUnitTestResources-3 /Users/heewook/dev/projects/packages/packages/webview_flutter/webview_flutter_android/android/build/intermediates/incremental/debugUnitTest/mergeDebugUnitTestResources/merged.dir
+io.flutter.plugins.webviewflutter.test-mergeDebugUnitTestResources-4 /Users/heewook/dev/projects/packages/packages/webview_flutter/webview_flutter_android/android/build/intermediates/incremental/debugUnitTest/mergeDebugUnitTestResources/stripped.dir
+io.flutter.plugins.webviewflutter.test-merged_res-5 /Users/heewook/dev/projects/packages/packages/webview_flutter/webview_flutter_android/android/build/intermediates/merged_res/debugUnitTest
+io.flutter.plugins.webviewflutter.test-packaged_res-6 /Users/heewook/dev/projects/packages/packages/webview_flutter/webview_flutter_android/android/build/intermediates/packaged_res/debug

@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "io.flutter.plugins.webviewflutterexample.app-mergeDebugResources-22:/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "/Users/heewook/.gradle/caches/transforms-3/253af552ea5dc93e6a93887a11d08e0f/transformed/appcompat-1.2.0/res/values-watch-v20/values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        }
+    ]
+}

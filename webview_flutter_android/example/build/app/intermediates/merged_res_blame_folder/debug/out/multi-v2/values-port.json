@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "io.flutter.plugins.webviewflutterexample.app-mergeDebugResources-22:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/heewook/.gradle/caches/transforms-3/253af552ea5dc93e6a93887a11d08e0f/transformed/appcompat-1.2.0/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}

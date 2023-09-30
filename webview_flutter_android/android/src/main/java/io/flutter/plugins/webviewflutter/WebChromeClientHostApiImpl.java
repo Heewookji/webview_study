@@ -84,6 +84,10 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
       ((ViewGroup) mFullscreenView.getParent()).removeView(mFullscreenView);
       mFullscreenView = null;
     }
+    @VisibleForTesting
+    public View getFullscreenView() {
+      return this.mFullscreenView;
+    }
 
     @Override
     public void onProgressChanged(@NonNull WebView view, int progress) {

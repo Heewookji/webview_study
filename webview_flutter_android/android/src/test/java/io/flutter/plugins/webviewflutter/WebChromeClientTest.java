@@ -15,8 +15,10 @@ import static org.mockito.Mockito.when;
 
 import android.net.Uri;
 import android.os.Message;
+import android.view.View;
 import android.webkit.GeolocationPermissions;
 import android.webkit.PermissionRequest;
+import android.webkit.WebChromeClient.CustomViewCallback;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebView.WebViewTransport;
@@ -123,6 +125,26 @@ public class WebChromeClientTest {
     instanceManager.addDartCreatedInstance(mockRequest, 10);
     webChromeClient.onPermissionRequest(mockRequest);
     verify(mockFlutterApi).onPermissionRequest(eq(webChromeClient), eq(mockRequest), any());
+  }
+
+  @Test
+  public void onShowCustomView() {
+    final View mockView = mock(View.class);
+    instanceManager.addDartCreatedInstance(mockView, 10);
+
+    final CustomViewCallback mockCustomViewCallback =
+            mock(CustomViewCallback.class);
+    instanceManager.addDartCreatedInstance(mockView, 12);
+
+    webChromeClient.onShowCustomView(mockView, mockCustomViewCallback);
+    verify(mockFlutterApi)
+            .onShowCustomView(eq(webChromeClient), eq(mockView), eq(mockCustomViewCallback), any());
+  }
+
+  @Test
+  public void onHideCustomView() {
+    webChromeClient.onHideCustomView();
+    verify(mockFlutterApi).onHideCustomView(eq(webChromeClient), any());
   }
 
   @Test

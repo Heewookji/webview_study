@@ -456,3 +456,8 @@ abstract class CustomViewCallbackHostApi {
 abstract class CustomViewCallbackFlutterApi {
   void create(int identifier);
 }
+
+@FlutterApi()
+abstract class ViewFlutterApi {
+  void create(int identifier);
+}

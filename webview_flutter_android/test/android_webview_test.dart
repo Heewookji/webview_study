@@ -1335,6 +1335,27 @@ void main() {
     });
   });
 
+  group('View', () {
+    test('FlutterAPI create', () {
+      final InstanceManager instanceManager = InstanceManager(
+        onWeakReferenceRemoved: (_) {},
+      );
+
+      final ViewFlutterApiImpl api = ViewFlutterApiImpl(
+        instanceManager: instanceManager,
+      );
+
+      const int instanceIdentifier = 0;
+
+      api.create(instanceIdentifier);
+
+      expect(
+        instanceManager.getInstanceWithWeakReference(instanceIdentifier),
+        isA<View>(),
+      );
+    });
+  });
+
   group('GeolocationPermissionsCallback', () {
     tearDown(() {
       TestGeolocationPermissionsCallbackHostApi.setup(null);

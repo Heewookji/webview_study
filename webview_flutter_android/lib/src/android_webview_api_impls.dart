@@ -48,6 +48,7 @@ class AndroidWebViewFlutterApis {
     WebViewFlutterApiImpl? webViewFlutterApi,
     PermissionRequestFlutterApiImpl? permissionRequestFlutterApi,
     CustomViewCallbackFlutterApiImpl? customViewCallbackFlutterApi,
+    ViewFlutterApiImpl? viewFlutterApiImpl,
   }) {
     this.javaObjectFlutterApi =
         javaObjectFlutterApi ?? JavaObjectFlutterApiImpl();
@@ -69,6 +70,7 @@ class AndroidWebViewFlutterApis {
         permissionRequestFlutterApi ?? PermissionRequestFlutterApiImpl();
     this.customViewCallbackFlutterApi =
         customViewCallbackFlutterApi ?? CustomViewCallbackFlutterApiImpl();
+    this.viewFlutterApi = viewFlutterApiImpl ?? ViewFlutterApiImpl();
   }
 
   static bool _haveBeenSetUp = false;
@@ -108,6 +110,8 @@ class AndroidWebViewFlutterApis {
 
   late final CustomViewCallbackFlutterApiImpl customViewCallbackFlutterApi;
 
+  late final ViewFlutterApiImpl viewFlutterApi;
+
   /// Ensures all the Flutter APIs have been setup to receive calls from native code.
   void ensureSetUp() {
     if (!_haveBeenSetUp) {
@@ -121,6 +125,8 @@ class AndroidWebViewFlutterApis {
           geolocationPermissionsCallbackFlutterApi);
       WebViewFlutterApi.setup(webViewFlutterApi);
       PermissionRequestFlutterApi.setup(permissionRequestFlutterApi);
+      CustomViewCallbackFlutterApi.setup(customViewCallbackFlutterApi);
+      ViewFlutterApi.setup(viewFlutterApi);
       _haveBeenSetUp = true;
     }
   }
@@ -1273,5 +1279,27 @@ class CustomViewCallbackFlutterApiImpl implements CustomViewCallbackFlutterApi {
           instanceManager: instanceManager,
         ),
         identifier);
+  }
+}
+
+class ViewFlutterApiImpl implements ViewFlutterApi {
+  ViewFlutterApiImpl({
+    this.binaryMessenger,
+    InstanceManager? instanceManager,
+  }) : instanceManager = instanceManager ?? JavaObject.globalInstanceManager;
+
+  final BinaryMessenger? binaryMessenger;
+
+  final InstanceManager instanceManager;
+
+  @override
+  void create(int identifier) {
+    instanceManager.addHostCreatedInstance(
+      View.detached(
+        binaryMessenger: binaryMessenger,
+        instanceManager: instanceManager,
+      ),
+      identifier,
+    );
   }
 }

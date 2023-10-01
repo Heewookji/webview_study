@@ -1371,6 +1371,12 @@ class WebStorage extends JavaObject {
   }
 }
 
+class View extends JavaObject {
+  @protected
+  View.detached({super.binaryMessenger, super.instanceManager})
+      : super.detached();
+}
+
 class CustomViewCallback extends JavaObject {
   @protected
   CustomViewCallback.detached({

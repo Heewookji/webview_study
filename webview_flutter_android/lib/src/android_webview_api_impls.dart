@@ -987,6 +987,32 @@ class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
       request.deny();
     }
   }
+
+  @override
+  void onShowCustomView(
+    int instanceId,
+    int viewIdentifier,
+    int callbackIdentifier,
+  ) {
+    final WebChromeClient instance =
+        instanceManager.getInstanceWithWeakReference(instanceId)!;
+    if (instance.onShowCustomView != null) {
+      instance.onShowCustomView!(
+        instance,
+        instanceManager.getInstanceWithWeakReference(viewIdentifier)!,
+        instanceManager.getInstanceWithWeakReference(callbackIdentifier)!,
+      );
+    }
+  }
+
+  @override
+  void onHideCustomView(int instanceId) {
+    final WebChromeClient instance =
+        instanceManager.getInstanceWithWeakReference(instanceId)!;
+    if (instance.onHideCustomView != null) {
+      instance.onHideCustomView!(instance);
+    }
+  }
 }
 
 /// Host api implementation for [WebStorage].

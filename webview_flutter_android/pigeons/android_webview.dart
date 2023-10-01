@@ -360,6 +360,16 @@ abstract class WebChromeClientFlutterApi {
   /// Callback to Dart function `WebChromeClient.onPermissionRequest`.
   void onPermissionRequest(int instanceId, int requestInstanceId);
 
+  void onShowCustomView(
+    int instanceId,
+    int viewIdentifier,
+    int callbackIdentifier,
+  );
+
+  void onHideCustomView(
+    int instanceId,
+  );
+
   /// Callback to Dart function `WebChromeClient.onGeolocationPermissionsShowPrompt`.
   void onGeolocationPermissionsShowPrompt(
     int instanceId,

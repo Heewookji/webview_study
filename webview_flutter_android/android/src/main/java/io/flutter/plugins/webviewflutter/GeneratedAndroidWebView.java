@@ -2311,6 +2311,22 @@ public class GeneratedAndroidWebView {
           new ArrayList<Object>(Arrays.asList(instanceIdArg, requestInstanceIdArg)),
           channelReply -> callback.reply(null));
     }
+    public void onShowCustomView(@NonNull Long instanceIdArg, @NonNull Long viewInstanceIdArg, @NonNull Long callbackInstanceIdArg, @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+          new BasicMessageChannel<>(
+              binaryMessenger, "dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onShowCustomView", getCodec());
+      channel.send(
+          new ArrayList<Object>(Arrays.asList(instanceIdArg, viewInstanceIdArg, callbackInstanceIdArg)),
+          channelReply -> callback.reply(null));
+    }
+    public void onHideCustomView(@NonNull Long instanceIdArg, @NonNull Reply<Void> callback) {
+      BasicMessageChannel<Object> channel =
+          new BasicMessageChannel<>(
+              binaryMessenger, "dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onHideCustomView", getCodec());
+      channel.send(
+          new ArrayList<Object>(Collections.singletonList(instanceIdArg)),
+          channelReply -> callback.reply(null));
+    }
     /** Callback to Dart function `WebChromeClient.onGeolocationPermissionsShowPrompt`. */
     public void onGeolocationPermissionsShowPrompt(@NonNull Long instanceIdArg, @NonNull Long paramsInstanceIdArg, @NonNull String originArg, @NonNull Reply<Void> callback) {
       BasicMessageChannel<Object> channel =

@@ -1031,6 +1031,8 @@ class WebChromeClient extends JavaObject {
     this.onProgressChanged,
     this.onShowFileChooser,
     this.onPermissionRequest,
+    this.onShowCustomView,
+    this.onHideCustomView,
     this.onGeolocationPermissionsShowPrompt,
     this.onGeolocationPermissionsHidePrompt,
     @visibleForTesting super.binaryMessenger,
@@ -1050,6 +1052,8 @@ class WebChromeClient extends JavaObject {
     this.onProgressChanged,
     this.onShowFileChooser,
     this.onPermissionRequest,
+    this.onShowCustomView,
+    this.onHideCustomView,
     this.onGeolocationPermissionsShowPrompt,
     this.onGeolocationPermissionsHidePrompt,
     super.binaryMessenger,
@@ -1085,6 +1089,14 @@ class WebChromeClient extends JavaObject {
     WebChromeClient instance,
     PermissionRequest request,
   )? onPermissionRequest;
+
+  final void Function(
+    WebChromeClient instance,
+    View view,
+    CustomViewCallback callback,
+  )? onShowCustomView;
+
+  final void Function(WebChromeClient instance)? onHideCustomView;
 
   /// Indicates the client should handle geolocation permissions.
   final GeolocationPermissionsShowPrompt? onGeolocationPermissionsShowPrompt;
@@ -1130,6 +1142,8 @@ class WebChromeClient extends JavaObject {
     return WebChromeClient.detached(
       onProgressChanged: onProgressChanged,
       onShowFileChooser: onShowFileChooser,
+      onShowCustomView: onShowCustomView,
+      onHideCustomView: onHideCustomView,
       onGeolocationPermissionsShowPrompt: onGeolocationPermissionsShowPrompt,
       onGeolocationPermissionsHidePrompt: onGeolocationPermissionsHidePrompt,
       binaryMessenger: _api.binaryMessenger,

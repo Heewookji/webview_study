@@ -1894,6 +1894,10 @@ abstract class WebChromeClientFlutterApi {
   /// Callback to Dart function `WebChromeClient.onPermissionRequest`.
   void onPermissionRequest(int instanceId, int requestInstanceId);
 
+  void onShowCustomView(int instanceId, int viewInstanceId, int callbackInstanceId);
+
+  void onHideCustomView(int instanceId);
+
   /// Callback to Dart function `WebChromeClient.onGeolocationPermissionsShowPrompt`.
   void onGeolocationPermissionsShowPrompt(int instanceId, int paramsInstanceId, String origin);
 
@@ -1969,6 +1973,50 @@ abstract class WebChromeClientFlutterApi {
           assert(arg_requestInstanceId != null,
               'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onPermissionRequest was null, expected non-null int.');
           api.onPermissionRequest(arg_instanceId!, arg_requestInstanceId!);
+          return;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onShowCustomView', codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onShowCustomView was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onShowCustomView was null, expected non-null int.');
+          final int? arg_viewInstanceId = (args[1] as int?);
+          assert(arg_viewInstanceId != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onShowCustomView was null, expected non-null int.');
+          final int? arg_callbackInstanceId = (args[2] as int?);
+          assert(arg_callbackInstanceId != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onShowCustomView was null, expected non-null int.');
+          api.onShowCustomView(arg_instanceId!, arg_viewInstanceId!, arg_callbackInstanceId!);
+          return;
+        });
+      }
+    }
+    {
+      final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
+          'dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onHideCustomView', codec,
+          binaryMessenger: binaryMessenger);
+      if (api == null) {
+        channel.setMessageHandler(null);
+      } else {
+        channel.setMessageHandler((Object? message) async {
+          assert(message != null,
+          'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onHideCustomView was null.');
+          final List<Object?> args = (message as List<Object?>?)!;
+          final int? arg_instanceId = (args[0] as int?);
+          assert(arg_instanceId != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onHideCustomView was null, expected non-null int.');
+          api.onHideCustomView(arg_instanceId!);
           return;
         });
       }

@@ -5,6 +5,7 @@
 package io.flutter.plugins.webviewflutter;
 
 import android.os.Build;
+import android.view.View;
 import android.webkit.GeolocationPermissions;
 import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
@@ -115,6 +116,29 @@ public class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
         Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
         Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(request)),
         callback);
+  }
+
+  public void onShowCustomView(
+          @NonNull WebChromeClient instance,
+          @NonNull View view,
+          @NonNull WebChromeClient.CustomViewCallback customViewCallback,
+          @NonNull WebChromeClientFlutterApi.Reply<Void> callback) {
+    new ViewFlutterApiImpl(binaryMessenger, instanceManager).create(view, reply -> {});
+    new CustomViewCallbackFlutterApiImpl(binaryMessenger, instanceManager)
+            .create(customViewCallback, reply -> {});
+
+    super.onShowCustomView(
+            Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
+            Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(view)),
+            Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(customViewCallback)),
+            callback);
+  }
+
+  public void onHideCustomView(
+          @NonNull WebChromeClient instance, @NonNull WebChromeClientFlutterApi.Reply<Void> callback) {
+    super.onHideCustomView(
+            Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
+            callback);
   }
 
   private long getIdentifierForClient(WebChromeClient webChromeClient) {

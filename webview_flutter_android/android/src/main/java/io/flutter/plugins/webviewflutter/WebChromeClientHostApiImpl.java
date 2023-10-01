@@ -7,6 +7,7 @@ package io.flutter.plugins.webviewflutter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
+import android.view.View;
 import android.webkit.GeolocationPermissions;
 import android.webkit.PermissionRequest;
 import android.webkit.ValueCallback;
@@ -50,6 +51,16 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
     @Override
     public void onProgressChanged(@NonNull WebView view, int progress) {
       flutterApi.onProgressChanged(this, view, (long) progress, reply -> {});
+    }
+
+    @Override
+    public void onShowCustomView(View view, CustomViewCallback callback) {
+      flutterApi.onShowCustomView(this, view, callback, reply -> {});
+    }
+
+    @Override
+    public void onHideCustomView() {
+      flutterApi.onHideCustomView(this, reply -> {});
     }
 
     @Override
